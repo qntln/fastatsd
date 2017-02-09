@@ -1,0 +1,15 @@
+# Python 2 compiled objects
+*.pyc
+
+# Python 3 compiled objects
+__pycache__
+
+# virtualenv
+env
+
+# Pytest
+.cache
+.coverage
+
+# Ide
+.idea
