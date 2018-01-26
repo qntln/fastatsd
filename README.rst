@@ -20,7 +20,7 @@ Example
 .. code-block:: python
 
 	>>> import fastatsd
-	>>> c = fastatsd.Fastatsd('localhost', 8125)
+	>>> c = fastatsd.FastatsClient('localhost', 8125)
 	>>> c.incr('foo')  # Increment the 'foo' counter.
 	>>> c.timing('stats.timed', 320)  # Record a 320ms 'stats.timed'.
 
