@@ -1,2 +1,2 @@
-cython>=0.25.1
+Cython==0.27.3
 git+https://github.com/qntln/cystatsd.git#egg=ql-cystatsd
