@@ -1,34 +1,35 @@
-from statsd import StatsClient
-
+import pytest
 from fastatsd.client import FastatsClient
 
+statsd = pytest.importorskip('statsd')
 
-def _incr_test(statsd):
+
+def _incr_test(client):
 	for i in range(10000):
-		statsd.incr('someALittleBitLongDescriptionOfTheMetric', 123)
+		client.incr('someALittleBitLongDescriptionOfTheMetric', 123)
 
 
-def _timer_test(statsd):
+def _timer_test(client):
 	for i in range(10000):
-		with statsd.timer('someALittleBitLongDescriptionOfTheMetric'):
+		with client.timer('someALittleBitLongDescriptionOfTheMetric'):
 			pass
 
 
 def test_fastatsd_incr_10000x(benchmark):
-	with FastatsClient() as statsd:
-		benchmark(_incr_test, statsd)
+	with FastatsClient() as client:
+		benchmark(_incr_test, client)
 
 
 def test_fastatsd_timer_10000x(benchmark):
-	with FastatsClient() as statsd:
-		benchmark(_timer_test, statsd)
+	with FastatsClient() as client:
+		benchmark(_timer_test, client)
 
 
 def test_statsd_incr_10000x(benchmark):
-	statsd = StatsClient()
-	benchmark(_incr_test, statsd)
+	client = statsd.StatsClient()
+	benchmark(_incr_test, client)
 
 
 def test_statsd_timer_10000x(benchmark):
-	statsd = StatsClient()
-	benchmark(_timer_test, statsd)
+	client = statsd.StatsClient()
+	benchmark(_timer_test, client)
